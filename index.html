@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>RUK FM 95.8 MHz - La Voix de Butembo</title>
+<style>
+body{margin:0;font-family:Arial,sans-serif;background:#0a0a0a;color:white;text-align:center}
+header{background:#ffcc00;color:black;padding:25px}
+header img{width:110px;border-radius:50%;background:white;padding:5px}
+header h1{margin:10px 0 0;font-size:32px}
+header p{font-style:italic;margin:5px}
+#galerie{display:flex;flex-wrap:wrap;justify-content:center;gap:20px;padding:20px}
+.card{background:#1a1a1a;border:2px solid #ffcc00;border-radius:15px;overflow:hidden;width:320px;text-align:left}
+.card img{width:100%;height:220px;object-fit:cover;display:block;cursor:zoom-in}
+.card-body{padding:15px}
+.card-body h2{margin:0 0 5px;color:#ffcc00}
+.badge{background:#ffcc00;color:black;padding:3px 10px;border-radius:20px;font-size:12px;font-weight:bold}
+footer{padding:20px;background:#111;font-size:13px;color:#aaa}
+.empty{text-align:center;padding:40px;color:#888}
+.programmes{display:flex;flex-wrap:wrap;justify-content:center;gap:15px;padding:10px 20px}
+.prog{background:#1a1a1a;border:1px solid #333;border-radius:12px;padding:15px;width:250px}
+.prog h3{color:#ffcc00;margin:0}
+</style>
+</head>
+<body>
+
+<header>
+<img src="https://res.cloudinary.com/vmqw9fnj/image/upload/c_fill,w_300,h_300,q_auto,f_auto/logo1.jpg" alt="Logo RUK FM">
+<h1>RUK FM 95.8 MHz</h1>
+<p>"La Voix de Butembo"</p>
+</header>
+
+<h2>📻 Nos Émissions</h2>
+<div class="programmes">
+<div class="prog"><h3>🌅 MATIN</h3><p><b>Journal</b></p><p>L'info de Butembo chaque matin</p></div>
+<div class="prog"><h3>☀️ MIDI</h3><p><b>Dédicace en Musique</b></p><p>Envoyez vos dédicaces</p></div>
+<div class="prog"><h3>🌙 SOIR</h3><p><b>Cha Bbo</b></p><p>Le rendez-vous du soir</p></div>
+</div>
+
+<h2>📸 Galerie RUK FM</h2>
+<div id="galerie"></div>
+
+<footer>RUK FM 95.8 MHz - La Voix de Butembo<br>Images hébergées sur Cloudinary - Aucune clé secrète utilisée</footer>
+
+<script>
+const CLOUD_NAME = "vmqw9fnj";
+
+// TES PHOTOS RUK - déjà sur Cloudinary
+// Même logique que TrustCar : title_fr / alt_fr / description_fr
+const photos = [
+  {
+    image: "Ruk2",
+    title_fr: "Studio RUK FM",
+    alt_fr: "Studio de RUK FM à Butembo",
+    description_fr: "Notre studio, la voix de Butembo"
+  },
+  {
+    image: "Ruk1",
+    title_fr: "Équipe RUK FM",
+    alt_fr: "Équipe RUK FM en direct",
+    description_fr: "En direct sur 95.8 MHz"
+  },
+  {
+    image: "logo1",
+    title_fr: "Logo RUK FM",
+    alt_fr: "Logo officiel RUK FM 95.8 MHz",
+    description_fr: "La Voix de Butembo"
+  }
+];
+
+const galerie = document.getElementById("galerie");
+
+if(photos.length === 0){
+  galerie.innerHTML = '<p class="empty">Galerie vide. Ajoutez des photos dans le code.</p>';
+} else {
+  photos.forEach(v => {
+    const titre = v.title_fr || "RUK FM";
+    const alt = v.alt_fr || titre;
+    const desc = v.description_fr || "";
+
+    // Carte optimisée Cloudinary : recadrée
+    const carte = `https://res.cloudinary.com/${CLOUD_NAME}/image/upload/c_fill,w_640,h_400,q_auto,f_auto/${v.image}.jpg`;
+    // Originale non recadrée : ouvre dans nouvel onglet au clic
+    const originale = `https://res.cloudinary.com/${CLOUD_NAME}/image/upload/${v.image}.jpg`;
+
+    galerie.innerHTML += `
+      <div class="card">
+        <a href="${originale}" target="_blank" rel="noopener">
+          <img src="${carte}" alt="${alt}" title="${alt}">
+        </a>
+        <div class="card-body">
+          <span class="badge">RUK FM</span>
+          <h2>${titre}</h2>
+          <p><b>Modèle :</b> ${alt}</p>
+          ${desc ? `<p><b>Description :</b> ${desc}</p>` : ``}
+        </div>
+      </div>
+    `;
+  });
+}
+</script>
+</body>
+  </html>
